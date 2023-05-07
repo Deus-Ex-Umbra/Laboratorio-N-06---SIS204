@@ -113,7 +113,7 @@ public:
 				cout << "--------------------------------------------------------------------\n";
 				cout << "Seleccione una opción: "; cin >> opcion_e;
 				cout << "--------------------------------------------------------------------\n";
-				if (lista_estudiante.lista_vacia_e(nodo_buscar) && (opcion_e > 1) && (opcion_e < 8)) { cout << "Error: Lista Vacía."; opcion_e = 9; }
+				if (lista_estudiante.lista_vacia_e(nodo_buscar) && (opcion_e > 1) && (opcion_e < 8)) { cout << "Error: Lista Vacía.\n"; opcion_e = 9; }
 				while (bool opcion_valida = (opcion_e < 1 || opcion_e > 8)) {
 					cout << "Seleccione una opción válida: "; cin >> opcion_e;
 					cout << "--------------------------------------------------------------------\n";

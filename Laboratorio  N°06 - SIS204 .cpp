@@ -22,7 +22,7 @@ int main(int argv, char** argc) {
 		cout << "--------------------------------------------------------------------\n";
 		cout << "Seleccione una opción: "; cin >> opcion; 
 		cout << "--------------------------------------------------------------------\n";
-		if (lista_asignatura.lista_vacia() && (opcion > 1) && (opcion < 8)) { cout << "Error: Lista Vacía."; opcion = 9; }
+		if (lista_asignatura.lista_vacia() && (opcion > 1) && (opcion < 8)) { cout << "Error: Lista Vacía.\n"; opcion = 9; }
 		while (bool opcion_valida = (opcion < 1 || opcion > 8)) {
 			cout << "Seleccione una opción válida: "; cin >> opcion;
 			cout << "--------------------------------------------------------------------\n";
