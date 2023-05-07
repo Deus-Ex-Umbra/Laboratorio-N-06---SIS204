@@ -1,0 +1,194 @@
+#pragma once
+#include <iostream>
+#include <string>
+#include "Nodo_Cabeza_Asignatura.h"
+#include "Nodo_Asignatura.h"
+#include "Nodo_Estudiante.h"
+#include "Lista_Estudiante.h"
+using namespace std;
+class Lista_Asignatura
+{
+private:
+	Lista_Estudiante lista_estudiante;
+	Nodo_Cabeza_Asignatura* nodo_cabeza;
+	Nodo_Asignatura* nodo_inicial;
+public:
+	Lista_Asignatura() : nodo_cabeza(new Nodo_Cabeza_Asignatura), nodo_inicial(new Nodo_Asignatura) {}
+	void insertar_asignatura(int _posicion) {
+		Nodo_Asignatura* nodo_nuevo = new Nodo_Asignatura();
+		while (_posicion > nodo_cabeza->cantidad_asignaturas + 1 || _posicion < 0) { 
+			cout << "Inserte una posición válida: "; cin >> _posicion; cin.ignore(); 
+			cout << "--------------------------------------------------------------------\n";
+		}
+		cout << "Código: "; getline(cin, nodo_nuevo->asignatura.codigo); 
+		cout << "Nombre de la Asignatura: "; getline(cin, nodo_nuevo->asignatura.nombre);
+		cout << "Descripción: "; getline(cin, nodo_nuevo->asignatura.descripcion); 
+		cout << "Cantidad de horas: "; cin >> nodo_nuevo->asignatura.cantidad_de_horas;
+		while (nodo_nuevo->asignatura.cantidad_de_horas > 24 || nodo_nuevo->asignatura.cantidad_de_horas < 1) {
+			cout << "Cantidad de horas incorrecta: "; cin >> nodo_nuevo->asignatura.cantidad_de_horas;
+		}
+		if (lista_vacia()) {
+				nodo_cabeza->siguiente = nodo_nuevo;
+				nodo_nuevo->anterior = nodo_cabeza;
+				nodo_nuevo->siguiente = nullptr;
+				nodo_inicial = nodo_nuevo;
+		} else {
+			Nodo_Asignatura* nodo_actual = nodo_inicial;
+			if (_posicion != 1) {
+				for (int i = 1; i < _posicion - 1; i++) { nodo_actual = nodo_actual->siguiente; }
+				nodo_nuevo->siguiente = nodo_actual->siguiente;
+				if (nodo_actual->siguiente != nullptr) { nodo_actual->siguiente->anterior = nodo_nuevo; }
+				nodo_nuevo->anterior = nodo_actual;
+				nodo_actual->siguiente = nodo_nuevo;
+			} else {
+				nodo_nuevo->siguiente = nodo_actual->siguiente;
+				if (nodo_nuevo->siguiente != nullptr) { nodo_actual->siguiente->anterior = nodo_nuevo; }
+				nodo_nuevo->anterior = nodo_cabeza;
+				nodo_inicial = nodo_nuevo;
+			}
+		}
+		cout << "--------------------------------------------------------------------\n";
+		nodo_cabeza->cantidad_asignaturas++;
+	}
+	void eliminar_asignatura(string _codigo) {
+		Nodo_Asignatura* nodo_eliminar = nodo_inicial; bool encontrar;
+		for (int i = 1; i < nodo_cabeza->cantidad_asignaturas; i++) {
+			nodo_eliminar = nodo_eliminar->siguiente;
+			encontrar = (nodo_eliminar->asignatura.codigo == _codigo);
+			if (encontrar) {
+				lista_estudiante.~Lista_Estudiante();
+				nodo_eliminar->anterior->siguiente = nodo_eliminar->siguiente;
+				nodo_eliminar->siguiente->anterior = nodo_eliminar->anterior;
+				delete nodo_eliminar;
+				cout << "Se ha eliminado correctamente la asignatura.\n";
+				cout << "--------------------------------------------------------------------\n";
+				nodo_cabeza->cantidad_asignaturas--; 
+				return;
+			}
+		}
+		cout << "No se ha encontrado la asignatura.\n";
+		cout << "--------------------------------------------------------------------\n";
+	}
+	void mostrar_asignaturas() {
+		Nodo_Asignatura* nodo_actual = nodo_inicial;
+		int i = 1;
+		cout << "Cantidad total de asignaturas: " << nodo_cabeza->cantidad_asignaturas << "\n";
+		do {
+			cout << "Asignatura N°" << i << ":\n";
+			cout << "Código: " << nodo_actual->asignatura.codigo << "\n";
+			cout << "Nombre: " << nodo_actual->asignatura.nombre << "\n";
+			cout << "Descripción: " << nodo_actual->asignatura.descripcion << "\n";
+			cout << "Cantidad de horas: " << nodo_actual->asignatura.cantidad_de_horas << "\n";
+			nodo_actual = nodo_actual->siguiente; i++;
+			cout << "--------------------------------------------------------------------\n";
+		} while (nodo_actual != nullptr);
+	}
+	void get_cantidad_asignaturas() { cout << "La cantidad de asignaturas es: " << nodo_cabeza->cantidad_asignaturas << "\n"; cout << "--------------------------------------------------------------------\n"; }
+	bool lista_vacia() {   return (nodo_cabeza->cantidad_asignaturas == 0); }
+	void ingresar_lista_estudiantes(string _codigo) {
+		Nodo_Asignatura* nodo_buscar = nodo_inicial;
+		bool encontrar = false;
+		while (nodo_buscar->siguiente != nullptr) {
+			if (_codigo == nodo_buscar->asignatura.codigo) { encontrar = true; break; }
+			nodo_buscar = nodo_buscar->siguiente;
+		}
+		if (encontrar) {
+			enum opciones_e { INSERTAR = 1, ELIMINAR = 2, MOSTRAR_E = 3, MOSTRAR_E_M = 4, MOSTRAR_E_F = 5 };
+			int opcion_e, posicion_e;
+			string codigo_e;
+			if (!existe_lista_e(nodo_buscar)) {
+				Lista_Estudiante lista_estudiante_aux(nodo_buscar); 
+				lista_estudiante = lista_estudiante_aux; 
+			} 
+			do {
+				cout << "--------------------------------------------------------------------\n"; //ASCII: 218, 196, 191, 179, 192, 217, 195, 180, 194, 193, 197,
+				cout << "****Lista de Estudiantes****\n";
+				cout << "--------------------------------------------------------------------\n";
+				cout << "1. Insertar un estudiante.\n";
+				cout << "2. Eliminar un estudiante.\n";
+				cout << "3. Mostrar todos los estudiantes.\n";
+				cout << "4. Mostrar cantidad de estudiantes masculinos.\n";
+				cout << "5. Mostrar cantidad de estudiantes femeninos.\n";
+				cout << ". Salir.\n";
+				cout << "--------------------------------------------------------------------\n";
+				cout << "Seleccione una opción: "; cin >> opcion_e;
+				cout << "--------------------------------------------------------------------\n";
+				if (lista_estudiante.lista_vacia_e(nodo_buscar) && (opcion_e > 1) && (opcion_e < 8)) { cout << "Error: Lista Vacía."; opcion_e = 9; }
+				while (bool opcion_valida = (opcion_e < 1 || opcion_e > 8)) {
+					cout << "Seleccione una opción válida: "; cin >> opcion_e;
+					cout << "--------------------------------------------------------------------\n";
+				}
+				cin.ignore();
+				opciones_e opcion_i = static_cast<opciones_e>(opcion_e);
+				switch (opcion_i) {
+				case INSERTAR:
+					cout << "***Se insertará un estudiante***\n";
+					cout << "--------------------------------------------------------------------\n";
+					cout << "Escriba la posición donde se insertará el estudiante: "; cin >> posicion_e; cin.ignore();
+					cout << "--------------------------------------------------------------------\n";
+					lista_estudiante.insertar_estudiante(nodo_buscar, posicion_e);
+					break;
+				case ELIMINAR:
+					cout << "***Se eliminará un estudiante***\n";
+					cout << "--------------------------------------------------------------------\n";
+					cout << "Escriba el código del estudiante que se eliminará: "; getline(cin, codigo_e); cin.ignore();
+					cout << "--------------------------------------------------------------------\n";
+					lista_estudiante.eliminar_estudiante(nodo_buscar, codigo_e);
+					break;
+				case MOSTRAR_E:
+					cout << "***Se mostrarán todos los estudiantes***\n";
+					cout << "--------------------------------------------------------------------\n";
+					lista_estudiante.mostrar_estudiantes(nodo_buscar);
+					break;
+				case MOSTRAR_E_M:
+					cout << "***Se mostrarán los estudiantes masculinos***\n";
+					cout << "--------------------------------------------------------------------\n";
+					lista_estudiante.mostar_estudiantes_masculinos(nodo_buscar);
+					break;
+				case MOSTRAR_E_F:
+					cout << "***Se mostrarán los estudiantes femeninos***\n";
+					cout << "--------------------------------------------------------------------\n";
+					lista_estudiante.mostar_estudiantes_femeninos(nodo_buscar);
+					break;
+				default:
+					cout << "Será retornado a la lista de asignaturas.\n"; 
+					cout << "--------------------------------------------------------------------\n"; system("pause"); break;
+					break;
+				}
+				system("pause");
+				system("cls");
+			} while (true);
+		} else { 
+			cout << "Error: No se encontró la asignatura con el código: " << _codigo << ".\n"; 
+			cout << "--------------------------------------------------------------------\n";
+		}
+	}
+	void get_cantidad_estudiantes(string _codigo) {
+		Nodo_Asignatura* nodo_buscar = nodo_inicial; bool encontrar = false;
+		while (nodo_buscar->siguiente != nullptr) {
+			if (_codigo == nodo_buscar->asignatura.codigo) { encontrar = true; break; }
+			nodo_buscar = nodo_buscar->siguiente;
+		}
+		if (encontrar) {
+			cout << "La cantidad de estudianes es: " << lista_estudiante.get_cantidad_estudiantes(nodo_buscar) << "\n";
+			cout << "--------------------------------------------------------------------\n";
+		} else {
+			cout << "Error: No se encontró la asignatura con el código: " << _codigo << ".\n";
+			cout << "--------------------------------------------------------------------\n";
+		}
+	}
+	bool existe_lista_e(Nodo_Asignatura* nodo_c) { return (nodo_c->siguiente_e == nullptr); }
+	void mostrar_todo() {
+		Nodo_Asignatura* nodo_actual = nodo_inicial; int i = 1;
+		do {
+			cout << "Asignatura N°" << i << ":\n";
+			cout << "Código: " << nodo_actual->asignatura.codigo << "\n";
+			cout << "Nombre: " << nodo_actual->asignatura.nombre << "\n";
+			cout << "Descripción: " << nodo_actual->asignatura.descripcion << "\n";
+			cout << "Cantidad de horas: " << nodo_actual->asignatura.cantidad_de_horas << "\n";
+			nodo_actual = nodo_actual->siguiente; i++;
+			cout << "--------------------------------------------------------------------\n";
+			lista_estudiante.mostrar_estudiantes(nodo_inicial);
+		} while (nodo_actual != nullptr);
+	}
+};
