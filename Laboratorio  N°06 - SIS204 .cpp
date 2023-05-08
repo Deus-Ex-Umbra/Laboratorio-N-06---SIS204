@@ -35,7 +35,11 @@ int main(int argv, char** argc) {
 		case INSERTAR:
 			cout << "***Se insertará una asignatura***\n";
 			cout << "--------------------------------------------------------------------\n";
-			cout << "Escriba la posición donde se insertará la asignatura: "; cin >> posicion; cin.ignore();
+			cout << "Escriba la posición donde se insertará la asignatura: ";
+			while (!(cin >> posicion)) { 
+				cout << "--------------------------------------------------------------------\n"; 
+				cin.clear(); cin.ignore(numeric_limits<streamsize>::max(), '\n'); cout << "Escriba la posición donde se insertará la asignatura: "; 
+			} cin.ignore();
 			cout << "--------------------------------------------------------------------\n";
 			lista_asignatura.insertar_asignatura(posicion);
 			break;

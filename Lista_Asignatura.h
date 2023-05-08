@@ -131,7 +131,13 @@ public:
 				case INSERTAR:
 					cout << "***Se insertará un estudiante***\n";
 					cout << "--------------------------------------------------------------------\n";
-					cout << "Escriba la posición donde se insertará el estudiante: "; cin >> posicion_e; cin.ignore();
+					cout << "Escriba la posición donde se insertará el estudiante: ";
+					while (!(cin >> posicion_e)) {
+						cin.clear();
+						cin.ignore(numeric_limits<streamsize>::max(), '\n');
+						cout << "--------------------------------------------------------------------\n";
+						cout << "Escriba la posición donde se insertará el estudiante: ";
+					} cin.ignore();
 					cout << "--------------------------------------------------------------------\n";
 					lista_estudiante.insertar_estudiante(nodo_buscar, posicion_e); system("pause");
 					break;
