@@ -40,7 +40,7 @@ int main(int argv, char** argc) {
 		case ELIMINAR:
 			cout << "***Se eliminará una asignatura***\n";
 			cout << "--------------------------------------------------------------------\n";
-			cout << "Escriba el código de la asignatura que se eliminará: "; getline(cin, codigo_a); cin.ignore();
+			cout << "Escriba el código de la asignatura que se eliminará: "; getline(cin, codigo_a);
 			cout << "--------------------------------------------------------------------\n";
 			lista_asignatura.eliminar_asignatura(codigo_a);
 			break;
@@ -57,14 +57,14 @@ int main(int argv, char** argc) {
 		case INGRESAR_A:
 			cout << "***Se ingresará a la lista de estudiantes de una asignatura***\n";
 			cout << "--------------------------------------------------------------------\n";
-			cout << "Escriba el código de la asignatura a la que se ingresará: "; getline(cin, codigo_a); cin.ignore();
+			cout << "Escriba el código de la asignatura a la que se ingresará: "; getline(cin, codigo_a);
 			cout << "--------------------------------------------------------------------\n";
 			lista_asignatura.ingresar_lista_estudiantes(codigo_a);
 			break;
 		case MOSTRAR_C_E:
 			cout << "***Se mostrará la cantidad de estudiantes de una asignatura***\n";
 			cout << "--------------------------------------------------------------------\n";
-			cout << "Escriba el código de la asignatura que desea revisar: "; getline(cin, codigo_a); cin.ignore();
+			cout << "Escriba el código de la asignatura que desea revisar: "; getline(cin, codigo_a);
 			cout << "--------------------------------------------------------------------\n";
 			lista_asignatura.get_cantidad_estudiantes(codigo_a);
 			break;

@@ -33,9 +33,6 @@
     <ClCompile Include="Lista_Estudiante.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="Nodo_Cabeza_Estudiante.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Nodo_Asignatura.h">
@@ -51,9 +48,6 @@
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="Lista_Estudiante.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="Nodo_Cabeza_Estudiante.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>

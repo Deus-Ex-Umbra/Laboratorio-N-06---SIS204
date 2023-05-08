@@ -41,8 +41,8 @@ public:
 				nodo_nuevo->anterior = nodo_actual;
 				nodo_actual->siguiente = nodo_nuevo;
 			} else {
-				nodo_nuevo->siguiente = nodo_actual->siguiente;
-				if (nodo_nuevo->siguiente != nullptr) { nodo_actual->siguiente->anterior = nodo_nuevo; }
+				nodo_nuevo->siguiente = nodo_actual;
+				if (nodo_nuevo->siguiente != nullptr) { nodo_actual->anterior = nodo_nuevo; }
 				nodo_nuevo->anterior = nodo_cabeza;
 				nodo_inicial = nodo_nuevo;
 			}
@@ -73,6 +73,7 @@ public:
 		Nodo_Asignatura* nodo_actual = nodo_inicial;
 		int i = 1;
 		cout << "Cantidad total de asignaturas: " << nodo_cabeza->cantidad_asignaturas << "\n";
+		cout << "--------------------------------------------------------------------\n";
 		do {
 			cout << "Asignatura N°" << i << ":\n";
 			cout << "Código: " << nodo_actual->asignatura.codigo << "\n";
@@ -88,7 +89,7 @@ public:
 	void ingresar_lista_estudiantes(string _codigo) {
 		Nodo_Asignatura* nodo_buscar = nodo_inicial;
 		bool encontrar = false;
-		while (nodo_buscar->siguiente != nullptr) {
+		while (nodo_buscar != nullptr) {
 			if (_codigo == nodo_buscar->asignatura.codigo) { encontrar = true; break; }
 			nodo_buscar = nodo_buscar->siguiente;
 		}
@@ -101,6 +102,7 @@ public:
 				lista_estudiante = lista_estudiante_aux; 
 			} 
 			do {
+				system("cls");
 				cout << "--------------------------------------------------------------------\n"; //ASCII: 218, 196, 191, 179, 192, 217, 195, 180, 194, 193, 197,
 				cout << "****Lista de Estudiantes****\n";
 				cout << "--------------------------------------------------------------------\n";
@@ -109,7 +111,7 @@ public:
 				cout << "3. Mostrar todos los estudiantes.\n";
 				cout << "4. Mostrar cantidad de estudiantes masculinos.\n";
 				cout << "5. Mostrar cantidad de estudiantes femeninos.\n";
-				cout << ". Salir.\n";
+				cout << "6. Salir.\n";
 				cout << "--------------------------------------------------------------------\n";
 				cout << "Seleccione una opción: "; cin >> opcion_e;
 				cout << "--------------------------------------------------------------------\n";
@@ -126,37 +128,35 @@ public:
 					cout << "--------------------------------------------------------------------\n";
 					cout << "Escriba la posición donde se insertará el estudiante: "; cin >> posicion_e; cin.ignore();
 					cout << "--------------------------------------------------------------------\n";
-					lista_estudiante.insertar_estudiante(nodo_buscar, posicion_e);
+					lista_estudiante.insertar_estudiante(nodo_buscar, posicion_e); system("pause");
 					break;
 				case ELIMINAR:
 					cout << "***Se eliminará un estudiante***\n";
 					cout << "--------------------------------------------------------------------\n";
 					cout << "Escriba el código del estudiante que se eliminará: "; getline(cin, codigo_e); cin.ignore();
 					cout << "--------------------------------------------------------------------\n";
-					lista_estudiante.eliminar_estudiante(nodo_buscar, codigo_e);
+					lista_estudiante.eliminar_estudiante(nodo_buscar, codigo_e); system("pause");
 					break;
 				case MOSTRAR_E:
 					cout << "***Se mostrarán todos los estudiantes***\n";
 					cout << "--------------------------------------------------------------------\n";
-					lista_estudiante.mostrar_estudiantes(nodo_buscar);
+					lista_estudiante.mostrar_estudiantes(nodo_buscar); system("pause");
 					break;
 				case MOSTRAR_E_M:
 					cout << "***Se mostrarán los estudiantes masculinos***\n";
 					cout << "--------------------------------------------------------------------\n";
-					lista_estudiante.mostar_estudiantes_masculinos(nodo_buscar);
+					lista_estudiante.mostar_estudiantes_masculinos(nodo_buscar); system("pause");
 					break;
 				case MOSTRAR_E_F:
-					cout << "***Se mostrarán los estudiantes femeninos***\n";
+					cout << "***Se mostrarán los estudiantes femeninos***\n"; system("pause");
 					cout << "--------------------------------------------------------------------\n";
-					lista_estudiante.mostar_estudiantes_femeninos(nodo_buscar);
+					lista_estudiante.mostar_estudiantes_femeninos(nodo_buscar); system("pause");
 					break;
 				default:
 					cout << "Será retornado a la lista de asignaturas.\n"; 
 					cout << "--------------------------------------------------------------------\n"; system("pause"); break;
 					break;
 				}
-				system("pause");
-				system("cls");
 			} while (true);
 		} else { 
 			cout << "Error: No se encontró la asignatura con el código: " << _codigo << ".\n"; 

@@ -132,7 +132,6 @@
     <ClCompile Include="Lista_Estudiante.cpp" />
     <ClCompile Include="Nodo_Asignatura.cpp" />
     <ClCompile Include="Nodo_Cabeza_Asignatura.cpp" />
-    <ClCompile Include="Nodo_Cabeza_Estudiante.cpp" />
     <ClCompile Include="Nodo_Estudiante.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -140,7 +139,6 @@
     <ClInclude Include="Lista_Estudiante.h" />
     <ClInclude Include="Nodo_Asignatura.h" />
     <ClInclude Include="Nodo_Cabeza_Asignatura.h" />
-    <ClInclude Include="Nodo_Cabeza_Estudiante.h" />
     <ClInclude Include="Nodo_Estudiante.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
