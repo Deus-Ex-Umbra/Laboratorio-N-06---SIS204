@@ -128,11 +128,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Laboratorio  N°06 - SIS204 .cpp" />
-    <ClCompile Include="Lista_Asignatura.cpp" />
-    <ClCompile Include="Lista_Estudiante.cpp" />
-    <ClCompile Include="Nodo_Asignatura.cpp" />
-    <ClCompile Include="Nodo_Cabeza_Asignatura.cpp" />
-    <ClCompile Include="Nodo_Estudiante.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Lista_Asignatura.h" />

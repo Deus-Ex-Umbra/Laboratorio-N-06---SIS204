@@ -1,18 +1,20 @@
 #pragma once
 #include <iostream>
 #include <string>
+#include "Lista_Asignatura.h"
 #include "Nodo_Asignatura.h"
 #include "Nodo_Estudiante.h"
 using namespace std;
 class Lista_Estudiante
 {
 private:
-	Nodo_Estudiante* nodo_inicial;
+	Nodo_Estudiante* nodo_inicial = nullptr;
 public:
-	Lista_Estudiante(Nodo_Asignatura* _nodo_c) : nodo_inicial(nullptr) { _nodo_c->siguiente_e = nodo_inicial; }
-	Lista_Estudiante() : nodo_inicial(nullptr) {}
+	Lista_Estudiante(Nodo_Asignatura* _nodo_c) { _nodo_c->siguiente_e = nodo_inicial; }
+	Lista_Estudiante() {}
 	void insertar_estudiante(Nodo_Asignatura* _nodo_c, int _posicion) {
-		Nodo_Estudiante* nodo_nuevo = new Nodo_Estudiante(); int sexo_i;
+		_nodo_c->siguiente_e = nodo_inicial;
+		Nodo_Estudiante* nodo_nuevo = new Nodo_Estudiante();
 		while (_posicion > _nodo_c->cantidad_estudiantes + 1 || _posicion < 0) {
 			cout << "Inserte una posición válida: "; cin >> _posicion; cin.ignore();
 			cout << "--------------------------------------------------------------------\n";
@@ -25,14 +27,13 @@ public:
 			cin.clear();
 			cin.ignore(numeric_limits<streamsize>::max(), '\n');
 			cout << "Edad del estudiante incorrecta: ";
+		} cin.ignore();
+		cout << "Sexo del estudiante (masculino/femenino): "; getline(cin, nodo_nuevo->estudiante.sexo);
+		while (nodo_nuevo->estudiante.sexo != "masculino" && nodo_nuevo->estudiante.sexo != "femenino") {
+			cout << "Sexo del estudiante incorrecto (masculino/femenino): "; getline(cin, nodo_nuevo->estudiante.sexo);
 		}
-		cout << "Sexo del estudiante: ";
-		do {
-			cout << "\n1. Masculino.\n"; cout << "2. Femenino.\n"; cin >> sexo_i;
-			nodo_nuevo->estudiante.sexo = (sexo_i == 1) ? "Masculino" : "Femenino";
-		} while (sexo_i > 2 || sexo_i < 1);
 		cout << "Nota del estudiante: "; 
-		while (!(cin >> nodo_nuevo->estudiante.nota) || nodo_nuevo->estudiante.nota > 100 || nodo_nuevo->estudiante.nota) {
+		while (!(cin >> nodo_nuevo->estudiante.nota) || nodo_nuevo->estudiante.nota > 100 || nodo_nuevo->estudiante.nota < 1) {
 			cin.clear();
 			cin.ignore(numeric_limits<streamsize>::max(), '\n');
 			cout << "Nota del estudiante incorrecta: ";
@@ -62,6 +63,7 @@ public:
 		_nodo_c->cantidad_estudiantes++;
 	}
 	void eliminar_estudiante(Nodo_Asignatura* _nodo_c, string _codigo) {
+		_nodo_c->siguiente_e = nodo_inicial;
 		Nodo_Estudiante* nodo_eliminar = nodo_inicial; bool encontrar;
 		while (nodo_eliminar->siguiente != nullptr) {
 			nodo_eliminar = nodo_eliminar->siguiente;
@@ -79,64 +81,68 @@ public:
 		cout << "--------------------------------------------------------------------\n";
 	}
 	void mostrar_estudiantes(Nodo_Asignatura* _nodo_c) {
+		_nodo_c->siguiente_e = nodo_inicial;
+		nodo_inicial = _nodo_c->siguiente_e;
 		Nodo_Estudiante* nodo_actual = nodo_inicial; int i = 1;
 		cout << "Cantidad de estudiantes en esta asignatura: " << _nodo_c->cantidad_estudiantes;
 		cout << "--------------------------------------------------------------------\n";
 		do {
 			cout << "Estudiante N°" << i << ":\n"; i++;
 			cout << "--------------------------------------------------------------------\n";
-			cout << "Código del estudiante: " << nodo_actual->estudiante.codigo;
-			cout << "Nombre del estudiante: " << nodo_actual->estudiante.nombre;
-			cout << "Dirección del estudiante: " << nodo_actual->estudiante.direccion;
-			cout << "Edad del estudiante: " << nodo_actual->estudiante.edad;
-			cout << "Sexo del estudiante: " << nodo_actual->estudiante.sexo;
-			cout << "Nota del estudiante: " << nodo_actual->estudiante.nota;
+			cout << "Código del estudiante: " << nodo_actual->estudiante.codigo << "\n";
+			cout << "Nombre del estudiante: " << nodo_actual->estudiante.nombre << "\n";
+			cout << "Dirección del estudiante: " << nodo_actual->estudiante.direccion << "\n";
+			cout << "Edad del estudiante: " << nodo_actual->estudiante.edad << "\n";
+			cout << "Sexo del estudiante: " << nodo_actual->estudiante.sexo << "\n";
+			cout << "Nota del estudiante: " << nodo_actual->estudiante.nota << "\n";
 			nodo_actual = nodo_actual->siguiente;
 			cout << "--------------------------------------------------------------------\n";
 		} while (nodo_actual != nullptr);
 	}
 	void mostar_estudiantes_masculinos(Nodo_Asignatura* _nodo_c) {
+		_nodo_c->siguiente_e = nodo_inicial;
+		nodo_inicial = _nodo_c->siguiente_e;
 		Nodo_Estudiante* nodo_actual = nodo_inicial; int i = 1;
 		cout << "Cantidad de estudiantes en esta asignatura: " << _nodo_c->cantidad_estudiantes;
 		cout << "--------------------------------------------------------------------\n";
 		do {
-			if (nodo_actual->estudiante.sexo == "Masculino") {
-				cout << "Estudiante N°" << i << ":\n";
+			if (nodo_actual->estudiante.sexo == "masculino") {
+				cout << "Estudiante N°" << i << ":\n"; i++;
 				cout << "--------------------------------------------------------------------\n";
-				cout << "Código del estudiante: " << nodo_actual->estudiante.codigo;
-				cout << "Nombre del estudiante: " << nodo_actual->estudiante.nombre;
-				cout << "Dirección del estudiante: " << nodo_actual->estudiante.direccion;
-				cout << "Edad del estudiante: " << nodo_actual->estudiante.edad;
-				cout << "Sexo del estudiante: " << nodo_actual->estudiante.sexo;
-				cout << "Nota del estudiante: " << nodo_actual->estudiante.nota;
-				cout << "--------------------------------------------------------------------\n";
+				cout << "Código del estudiante: " << nodo_actual->estudiante.codigo << "\n";
+				cout << "Nombre del estudiante: " << nodo_actual->estudiante.nombre << "\n";
+				cout << "Dirección del estudiante: " << nodo_actual->estudiante.direccion << "\n";
+				cout << "Edad del estudiante: " << nodo_actual->estudiante.edad << "\n";
+				cout << "Sexo del estudiante: " << nodo_actual->estudiante.sexo << "\n";
+				cout << "Nota del estudiante: " << nodo_actual->estudiante.nota << "\n";
 			}
 			nodo_actual = nodo_actual->siguiente;
 		} while (nodo_actual != nullptr);
 	}
 	void mostar_estudiantes_femeninos(Nodo_Asignatura* _nodo_c) {
+		_nodo_c->siguiente_e = nodo_inicial;
 		Nodo_Estudiante* nodo_actual = nodo_inicial; int i = 1;
-		cout << "Cantidad de estudiantes en esta asignatura: " << _nodo_c->cantidad_estudiantes;
+		cout << "Cantidad de estudiantes en esta asignatura: " << _nodo_c->cantidad_estudiantes << "\n.";
 		cout << "--------------------------------------------------------------------\n";
 		do {
 			i++;
-			if (nodo_actual->estudiante.sexo == "Femenino") {
-				cout << "Estudiante N°" << i << ":\n";
+			if (nodo_actual->estudiante.sexo == "femenino") {
+				cout << "Estudiante N°" << i << ":\n"; i++;
 				cout << "--------------------------------------------------------------------\n";
-				cout << "Código del estudiante: " << nodo_actual->estudiante.codigo;
-				cout << "Nombre del estudiante: " << nodo_actual->estudiante.nombre;
-				cout << "Dirección del estudiante: " << nodo_actual->estudiante.direccion;
-				cout << "Edad del estudiante: " << nodo_actual->estudiante.edad;
-				cout << "Sexo del estudiante: " << nodo_actual->estudiante.sexo;
-				cout << "Nota del estudiante: " << nodo_actual->estudiante.nota;
-				cout << "--------------------------------------------------------------------\n";
+				cout << "Código del estudiante: " << nodo_actual->estudiante.codigo << "\n";
+				cout << "Nombre del estudiante: " << nodo_actual->estudiante.nombre << "\n";
+				cout << "Dirección del estudiante: " << nodo_actual->estudiante.direccion << "\n";
+				cout << "Edad del estudiante: " << nodo_actual->estudiante.edad << "\n";
+				cout << "Sexo del estudiante: " << nodo_actual->estudiante.sexo << "\n";
+				cout << "Nota del estudiante: " << nodo_actual->estudiante.nota << "\n";
 			}
 			nodo_actual = nodo_actual->siguiente;
 		} while (nodo_actual != nullptr);
 	}
 	bool lista_vacia_e(Nodo_Asignatura* _nodo_c) { return (_nodo_c->cantidad_estudiantes == 0); }
 	int get_cantidad_estudiantes(Nodo_Asignatura* _nodo_c) { return (_nodo_c->cantidad_estudiantes); }
-	~Lista_Estudiante() {
+	void eliminar_todo(Nodo_Asignatura* _nodo_c) {
+		_nodo_c->siguiente_e = nodo_inicial;
 		Nodo_Estudiante* nodo_eliminar = nodo_inicial;
 		while (nodo_eliminar != nullptr) {
 			Nodo_Estudiante* nodo_siguiente = nodo_eliminar->siguiente;

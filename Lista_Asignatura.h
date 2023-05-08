@@ -3,7 +3,6 @@
 #include <string>
 #include "Nodo_Cabeza_Asignatura.h"
 #include "Nodo_Asignatura.h"
-#include "Nodo_Estudiante.h"
 #include "Lista_Estudiante.h"
 using namespace std;
 class Lista_Asignatura
@@ -30,19 +29,22 @@ public:
 			cout << "Cantidad de horas incorrecta: ";
 		}
 		if (lista_vacia()) {
-				nodo_cabeza->siguiente = nodo_nuevo;
-				nodo_nuevo->anterior = nodo_cabeza;
-				nodo_nuevo->siguiente = nullptr;
-				nodo_inicial = nodo_nuevo;
+			nodo_nuevo->siguiente_e = nullptr;
+			nodo_cabeza->siguiente = nodo_nuevo;
+			nodo_nuevo->anterior = nodo_cabeza;
+			nodo_nuevo->siguiente = nullptr;
+			nodo_inicial = nodo_nuevo;
 		} else {
 			Nodo_Asignatura* nodo_actual = nodo_inicial;
 			if (_posicion != 1) {
 				for (int i = 1; i < _posicion - 1; i++) { nodo_actual = nodo_actual->siguiente; }
+				nodo_nuevo->siguiente_e = nullptr;
 				nodo_nuevo->siguiente = nodo_actual->siguiente;
 				if (nodo_actual->siguiente != nullptr) { nodo_actual->siguiente->anterior = nodo_nuevo; }
 				nodo_nuevo->anterior = nodo_actual;
 				nodo_actual->siguiente = nodo_nuevo;
 			} else {
+				nodo_nuevo->siguiente_e = nullptr;
 				nodo_nuevo->siguiente = nodo_actual;
 				if (nodo_nuevo->siguiente != nullptr) { nodo_actual->anterior = nodo_nuevo; }
 				nodo_nuevo->anterior = nodo_cabeza;
@@ -58,7 +60,7 @@ public:
 			nodo_eliminar = nodo_eliminar->siguiente;
 			encontrar = (nodo_eliminar->asignatura.codigo == _codigo);
 			if (encontrar) {
-				lista_estudiante.~Lista_Estudiante();
+				lista_estudiante.eliminar_todo(nodo_eliminar);
 				nodo_eliminar->anterior->siguiente = nodo_eliminar->siguiente;
 				nodo_eliminar->siguiente->anterior = nodo_eliminar->anterior;
 				delete nodo_eliminar;
@@ -99,8 +101,8 @@ public:
 			enum opciones_e { INSERTAR = 1, ELIMINAR = 2, MOSTRAR_E = 3, MOSTRAR_E_M = 4, MOSTRAR_E_F = 5 };
 			int opcion_e, posicion_e;
 			string codigo_e;
-			if (!existe_lista_e(nodo_buscar)) {
-				Lista_Estudiante lista_estudiante_aux(nodo_buscar); 
+			if (nodo_buscar->siguiente_e == nullptr) {
+				Lista_Estudiante lista_estudiante_aux(nodo_buscar);
 				lista_estudiante = lista_estudiante_aux; 
 			} 
 			do {
@@ -157,7 +159,7 @@ public:
 					break;
 				default:
 					cout << "Será retornado a la lista de asignaturas.\n"; 
-					cout << "--------------------------------------------------------------------\n"; system("pause"); break;
+					cout << "--------------------------------------------------------------------\n"; return;
 					break;
 				}
 			} while (true);
@@ -180,7 +182,6 @@ public:
 			cout << "--------------------------------------------------------------------\n";
 		}
 	}
-	bool existe_lista_e(Nodo_Asignatura* nodo_c) { return (nodo_c->siguiente_e == nullptr); }
 	void mostrar_todo() {
 		Nodo_Asignatura* nodo_actual = nodo_inicial; int i = 1;
 		do {
@@ -189,9 +190,9 @@ public:
 			cout << "Nombre: " << nodo_actual->asignatura.nombre << "\n";
 			cout << "Descripción: " << nodo_actual->asignatura.descripcion << "\n";
 			cout << "Cantidad de horas: " << nodo_actual->asignatura.cantidad_de_horas << "\n";
-			nodo_actual = nodo_actual->siguiente; i++;
 			cout << "--------------------------------------------------------------------\n";
-			lista_estudiante.mostrar_estudiantes(nodo_inicial);
+			if (!lista_estudiante.lista_vacia_e(nodo_actual)) { lista_estudiante.mostrar_estudiantes(nodo_actual); }
+			nodo_actual = nodo_actual->siguiente; i++;
 		} while (nodo_actual != nullptr);
 	}
 };
