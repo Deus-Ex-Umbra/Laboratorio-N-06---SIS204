@@ -57,7 +57,6 @@ public:
 	void eliminar_asignatura(string _codigo) {
 		Nodo_Asignatura* nodo_eliminar = nodo_inicial; bool encontrar;
 		for (int i = 1; i < nodo_cabeza->cantidad_asignaturas; i++) {
-			nodo_eliminar = nodo_eliminar->siguiente;
 			encontrar = (nodo_eliminar->asignatura.codigo == _codigo);
 			if (encontrar) {
 				lista_estudiante.eliminar_todo(nodo_eliminar);
@@ -69,6 +68,7 @@ public:
 				nodo_cabeza->cantidad_asignaturas--; 
 				return;
 			}
+			nodo_eliminar = nodo_eliminar->siguiente;
 		}
 		cout << "No se ha encontrado la asignatura.\n";
 		cout << "--------------------------------------------------------------------\n";
@@ -159,7 +159,7 @@ public:
 					lista_estudiante.mostar_estudiantes_masculinos(nodo_buscar); system("pause");
 					break;
 				case MOSTRAR_E_F:
-					cout << "***Se mostrarán los estudiantes femeninos***\n"; system("pause");
+					cout << "***Se mostrarán los estudiantes femeninos***\n";
 					cout << "--------------------------------------------------------------------\n";
 					lista_estudiante.mostar_estudiantes_femeninos(nodo_buscar); system("pause");
 					break;

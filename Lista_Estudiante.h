@@ -84,7 +84,8 @@ public:
 		_nodo_c->siguiente_e = nodo_inicial;
 		nodo_inicial = _nodo_c->siguiente_e;
 		Nodo_Estudiante* nodo_actual = nodo_inicial; int i = 1;
-		cout << "Cantidad de estudiantes en esta asignatura: " << _nodo_c->cantidad_estudiantes;
+		cout << "--------------------------------------------------------------------\n";
+		cout << "Cantidad de estudiantes en esta asignatura: " << _nodo_c->cantidad_estudiantes << "\n";
 		cout << "--------------------------------------------------------------------\n";
 		do {
 			cout << "Estudiante N°" << i << ":\n"; i++;
@@ -97,13 +98,15 @@ public:
 			cout << "Nota del estudiante: " << nodo_actual->estudiante.nota << "\n";
 			nodo_actual = nodo_actual->siguiente;
 			cout << "--------------------------------------------------------------------\n";
+			cout << "--------------------------------------------------------------------\n";
 		} while (nodo_actual != nullptr);
 	}
 	void mostar_estudiantes_masculinos(Nodo_Asignatura* _nodo_c) {
 		_nodo_c->siguiente_e = nodo_inicial;
 		nodo_inicial = _nodo_c->siguiente_e;
 		Nodo_Estudiante* nodo_actual = nodo_inicial; int i = 1;
-		cout << "Cantidad de estudiantes en esta asignatura: " << _nodo_c->cantidad_estudiantes;
+		cout << "--------------------------------------------------------------------\n";
+		cout << "Cantidad de estudiantes en esta asignatura: " << _nodo_c->cantidad_estudiantes << "\n";
 		cout << "--------------------------------------------------------------------\n";
 		do {
 			if (nodo_actual->estudiante.sexo == "masculino") {
@@ -115,6 +118,7 @@ public:
 				cout << "Edad del estudiante: " << nodo_actual->estudiante.edad << "\n";
 				cout << "Sexo del estudiante: " << nodo_actual->estudiante.sexo << "\n";
 				cout << "Nota del estudiante: " << nodo_actual->estudiante.nota << "\n";
+				cout << "--------------------------------------------------------------------\n";
 			}
 			nodo_actual = nodo_actual->siguiente;
 		} while (nodo_actual != nullptr);
@@ -122,10 +126,10 @@ public:
 	void mostar_estudiantes_femeninos(Nodo_Asignatura* _nodo_c) {
 		_nodo_c->siguiente_e = nodo_inicial;
 		Nodo_Estudiante* nodo_actual = nodo_inicial; int i = 1;
+		cout << "--------------------------------------------------------------------\n";
 		cout << "Cantidad de estudiantes en esta asignatura: " << _nodo_c->cantidad_estudiantes << "\n.";
 		cout << "--------------------------------------------------------------------\n";
 		do {
-			i++;
 			if (nodo_actual->estudiante.sexo == "femenino") {
 				cout << "Estudiante N°" << i << ":\n"; i++;
 				cout << "--------------------------------------------------------------------\n";
@@ -135,6 +139,7 @@ public:
 				cout << "Edad del estudiante: " << nodo_actual->estudiante.edad << "\n";
 				cout << "Sexo del estudiante: " << nodo_actual->estudiante.sexo << "\n";
 				cout << "Nota del estudiante: " << nodo_actual->estudiante.nota << "\n";
+				cout << "--------------------------------------------------------------------\n";
 			}
 			nodo_actual = nodo_actual->siguiente;
 		} while (nodo_actual != nullptr);
