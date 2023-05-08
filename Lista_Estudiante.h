@@ -20,16 +20,23 @@ public:
 		cout << "Código del estudiante: "; getline(cin, nodo_nuevo->estudiante.codigo);
 		cout << "Nombre del estudiante: "; getline(cin, nodo_nuevo->estudiante.nombre);
 		cout << "Dirección del estudiante: "; getline(cin, nodo_nuevo->estudiante.direccion);
-		cout << "Edad del estudiante: "; cin >> nodo_nuevo->estudiante.edad; cin.ignore();
-		while (nodo_nuevo->estudiante.edad > 125 || nodo_nuevo->estudiante.edad < 0) {
-			cout << "Edad del estudiante correcta: "; cin >> nodo_nuevo->estudiante.edad; cin.ignore();
+		cout << "Edad del estudiante: "; 
+		while (!(cin >> nodo_nuevo->estudiante.edad) || nodo_nuevo->estudiante.edad > 125 || nodo_nuevo->estudiante.edad < 0) {
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			cout << "Edad del estudiante incorrecta: ";
 		}
 		cout << "Sexo del estudiante: ";
 		do {
-			cout << "1. Masculino.\n"; cout << "2. Femenino.\n"; cin >> sexo_i;
+			cout << "\n1. Masculino.\n"; cout << "2. Femenino.\n"; cin >> sexo_i;
 			nodo_nuevo->estudiante.sexo = (sexo_i == 1) ? "Masculino" : "Femenino";
 		} while (sexo_i > 2 || sexo_i < 1);
-		cout << "Nota del estudiante: "; cin >> nodo_nuevo->estudiante.nota;
+		cout << "Nota del estudiante: "; 
+		while (!(cin >> nodo_nuevo->estudiante.nota) || nodo_nuevo->estudiante.nota > 100 || nodo_nuevo->estudiante.nota) {
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			cout << "Nota del estudiante incorrecta: ";
+		}
 		if (lista_vacia_e(_nodo_c)) {
 			nodo_nuevo->anterior = nullptr;
 			nodo_nuevo->siguiente = nullptr;
@@ -131,7 +138,7 @@ public:
 	int get_cantidad_estudiantes(Nodo_Asignatura* _nodo_c) { return (_nodo_c->cantidad_estudiantes); }
 	~Lista_Estudiante() {
 		Nodo_Estudiante* nodo_eliminar = nodo_inicial;
-		while (nodo_eliminar->siguiente != nullptr) {
+		while (nodo_eliminar != nullptr) {
 			Nodo_Estudiante* nodo_siguiente = nodo_eliminar->siguiente;
 			delete nodo_eliminar;
 			nodo_eliminar = nodo_siguiente;

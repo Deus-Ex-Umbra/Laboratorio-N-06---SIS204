@@ -20,13 +20,15 @@ int main(int argv, char** argc) {
 		cout << "7. Mostrar todas las asignaturas y sus estudiantes respectivos.\n";
 		cout << "8. Salir.\n";
 		cout << "--------------------------------------------------------------------\n";
-		cout << "Seleccione una opción: "; cin >> opcion; 
-		cout << "--------------------------------------------------------------------\n";
-		if (lista_asignatura.lista_vacia() && (opcion > 1) && (opcion < 8)) { cout << "Error: Lista Vacía.\n"; opcion = 9; }
-		while (bool opcion_valida = (opcion < 1 || opcion > 8)) {
-			cout << "Seleccione una opción válida: "; cin >> opcion;
+		cout << "Seleccione una opción: ";
+		while (!(cin >> opcion) || (opcion < 1 || opcion > 8)) {
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
 			cout << "--------------------------------------------------------------------\n";
+			cout << "Seleccione una opción válida: ";
 		}
+		if (lista_asignatura.lista_vacia() && (opcion > 1) && (opcion < 8)) { cout << "Error: Lista Vacía.\n"; opcion = 9; }
+		cout << "--------------------------------------------------------------------\n";
 		cin.ignore();
 		opciones opcion_i = static_cast<opciones>(opcion);
 		switch (opcion_i) {

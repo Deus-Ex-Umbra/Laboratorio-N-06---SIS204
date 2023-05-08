@@ -23,9 +23,11 @@ public:
 		cout << "Código: "; getline(cin, nodo_nuevo->asignatura.codigo); 
 		cout << "Nombre de la Asignatura: "; getline(cin, nodo_nuevo->asignatura.nombre);
 		cout << "Descripción: "; getline(cin, nodo_nuevo->asignatura.descripcion); 
-		cout << "Cantidad de horas: "; cin >> nodo_nuevo->asignatura.cantidad_de_horas;
-		while (nodo_nuevo->asignatura.cantidad_de_horas > 24 || nodo_nuevo->asignatura.cantidad_de_horas < 1) {
-			cout << "Cantidad de horas incorrecta: "; cin >> nodo_nuevo->asignatura.cantidad_de_horas;
+		cout << "Cantidad de horas: "; 
+		while (!(cin >> nodo_nuevo->asignatura.cantidad_de_horas) || (nodo_nuevo->asignatura.cantidad_de_horas > 24 || nodo_nuevo->asignatura.cantidad_de_horas < 1)) {
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			cout << "Cantidad de horas incorrecta: ";
 		}
 		if (lista_vacia()) {
 				nodo_cabeza->siguiente = nodo_nuevo;
@@ -113,13 +115,14 @@ public:
 				cout << "5. Mostrar cantidad de estudiantes femeninos.\n";
 				cout << "6. Salir.\n";
 				cout << "--------------------------------------------------------------------\n";
-				cout << "Seleccione una opción: "; cin >> opcion_e;
-				cout << "--------------------------------------------------------------------\n";
-				if (lista_estudiante.lista_vacia_e(nodo_buscar) && (opcion_e > 1) && (opcion_e < 8)) { cout << "Error: Lista Vacía.\n"; opcion_e = 9; }
-				while (bool opcion_valida = (opcion_e < 1 || opcion_e > 8)) {
-					cout << "Seleccione una opción válida: "; cin >> opcion_e;
+				cout << "Seleccione una opción: ";
+				while (!(cin >> opcion_e) || (opcion_e < 1 || opcion_e > 8)) {
+					cin.clear();
+					cin.ignore(numeric_limits<streamsize>::max(), '\n');
 					cout << "--------------------------------------------------------------------\n";
+					cout << "Seleccione una opción válida: ";
 				}
+				if (lista_estudiante.lista_vacia_e(nodo_buscar) && (opcion_e > 1) && (opcion_e < 8)) { cout << "Error: Lista Vacía.\n"; opcion_e = 9; }
 				cin.ignore();
 				opciones_e opcion_i = static_cast<opciones_e>(opcion_e);
 				switch (opcion_i) {
