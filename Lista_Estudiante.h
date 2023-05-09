@@ -81,7 +81,6 @@ public:
 		cout << "--------------------------------------------------------------------\n";
 	}
 	void mostrar_estudiantes(Nodo_Asignatura* _nodo_c) {
-		_nodo_c->siguiente_e = nodo_inicial;
 		nodo_inicial = _nodo_c->siguiente_e;
 		Nodo_Estudiante* nodo_actual = nodo_inicial; int i = 1;
 		cout << "--------------------------------------------------------------------\n";
@@ -102,7 +101,6 @@ public:
 		} while (nodo_actual != nullptr);
 	}
 	void mostar_estudiantes_masculinos(Nodo_Asignatura* _nodo_c) {
-		_nodo_c->siguiente_e = nodo_inicial;
 		nodo_inicial = _nodo_c->siguiente_e;
 		Nodo_Estudiante* nodo_actual = nodo_inicial; int i = 1;
 		cout << "--------------------------------------------------------------------\n";
@@ -124,7 +122,7 @@ public:
 		} while (nodo_actual != nullptr);
 	}
 	void mostar_estudiantes_femeninos(Nodo_Asignatura* _nodo_c) {
-		_nodo_c->siguiente_e = nodo_inicial;
+		nodo_inicial = _nodo_c->siguiente_e;
 		Nodo_Estudiante* nodo_actual = nodo_inicial; int i = 1;
 		cout << "--------------------------------------------------------------------\n";
 		cout << "Cantidad de estudiantes en esta asignatura: " << _nodo_c->cantidad_estudiantes << "\n.";
@@ -147,7 +145,7 @@ public:
 	bool lista_vacia_e(Nodo_Asignatura* _nodo_c) { return (_nodo_c->cantidad_estudiantes == 0); }
 	int get_cantidad_estudiantes(Nodo_Asignatura* _nodo_c) { return (_nodo_c->cantidad_estudiantes); }
 	void eliminar_todo(Nodo_Asignatura* _nodo_c) {
-		_nodo_c->siguiente_e = nodo_inicial;
+		nodo_inicial = _nodo_c->siguiente_e;
 		Nodo_Estudiante* nodo_eliminar = nodo_inicial;
 		while (nodo_eliminar != nullptr) {
 			Nodo_Estudiante* nodo_siguiente = nodo_eliminar->siguiente;

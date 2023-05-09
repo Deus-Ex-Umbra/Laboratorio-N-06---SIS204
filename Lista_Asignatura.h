@@ -30,8 +30,8 @@ public:
 		}
 		if (lista_vacia()) {
 			nodo_nuevo->siguiente_e = nullptr;
-			nodo_cabeza->siguiente = nodo_nuevo;
-			nodo_nuevo->anterior = nodo_cabeza;
+			nodo_cabeza->siguiente_a = nodo_nuevo;
+			nodo_nuevo->anterior = nullptr;
 			nodo_nuevo->siguiente = nullptr;
 			nodo_inicial = nodo_nuevo;
 		} else {
@@ -47,7 +47,7 @@ public:
 				nodo_nuevo->siguiente_e = nullptr;
 				nodo_nuevo->siguiente = nodo_actual;
 				if (nodo_nuevo->siguiente != nullptr) { nodo_actual->anterior = nodo_nuevo; }
-				nodo_nuevo->anterior = nodo_cabeza;
+				nodo_nuevo->anterior = nullptr;
 				nodo_inicial = nodo_nuevo;
 			}
 		}
@@ -124,7 +124,7 @@ public:
 					cout << "--------------------------------------------------------------------\n";
 					cout << "Seleccione una opción válida: ";
 				}
-				if (lista_estudiante.lista_vacia_e(nodo_buscar) && (opcion_e > 1) && (opcion_e < 8)) { cout << "Error: Lista Vacía.\n"; opcion_e = 9; }
+				if (lista_estudiante.lista_vacia_e(nodo_buscar) && (opcion_e > 1) && (opcion_e < 8)) { cout << "Error: Lista Vacía.\n"; opcion_e = 1; }
 				cin.ignore();
 				opciones_e opcion_i = static_cast<opciones_e>(opcion_e);
 				switch (opcion_i) {
