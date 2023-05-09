@@ -8,6 +8,7 @@ int main(int argv, char** argc) {
 	enum opciones { INSERTAR = 1, ELIMINAR = 2, MOSTRAR_A = 3, MOSTRAR_C_A = 4, INGRESAR_A = 5, MOSTRAR_C_E = 6, MOSTRAR_A_E = 7};
 	int opcion, posicion;
 	do {
+		system("cls");
 		cout << "--------------------------------------------------------------------\n"; //ASCII: 218, 196, 191, 179, 192, 217, 195, 180, 194, 193, 197,
 		cout << "****Lista de Asignaturas****\n";
 		cout << "--------------------------------------------------------------------\n";
@@ -85,7 +86,6 @@ int main(int argv, char** argc) {
 			break;
 		}
 		system("pause");
-		system("cls");
 	} while (true);
 	return 0;
 }
