@@ -4,7 +4,7 @@ class Nodo_Estudiante
 {
 public:
 	struct Estudiante {
-		std::string codigo, nombre, direccion, sexo;
+		std::string codigo, nombre, direccion, sexo, estado;
 		int edad, nota;
 	}estudiante;
 	Nodo_Estudiante* siguiente, * anterior;

@@ -11,7 +11,12 @@ private:
 	Lista_Estudiante lista_estudiante;
 	Nodo_Cabeza_Asignatura* nodo_cabeza;
 	Nodo_Asignatura* nodo_inicial;
-	/*Nodo_Asignatura* buscar_nodo(Nodo_Asignatura* nodo_c, int _posicion = 0, string _codigo = "") {}*/
+	Nodo_Asignatura* buscar_nodo(Nodo_Asignatura* nodo_c, int _posicion = -1, string _codigo_n = "", string _codigo = " ") {
+		int indice_busqueda = 1;
+		while ((nodo_c != nullptr) && (indice_busqueda != _posicion - 1) && (_codigo_n != _codigo)) { nodo_c = nodo_c->siguiente; indice_busqueda++; }
+		return nodo_c;
+	}
+	bool nodo_encontrar(Nodo_Asignatura* nodo_c) { return (nodo_c != nullptr); }
 public:
 	Lista_Asignatura() : nodo_cabeza(new Nodo_Cabeza_Asignatura), nodo_inicial(new Nodo_Asignatura) {}
 	void insertar_asignatura(int _posicion) {
@@ -38,7 +43,7 @@ public:
 		} else {
 			Nodo_Asignatura* nodo_actual = nodo_inicial;
 			if (_posicion != 1) {
-				for (int i = 1; i < _posicion - 1; i++) { nodo_actual = nodo_actual->siguiente; }
+				nodo_actual = buscar_nodo(nodo_actual, _posicion);
 				nodo_nuevo->siguiente_e = nullptr;
 				nodo_nuevo->siguiente = nodo_actual->siguiente;
 				if (nodo_actual->siguiente != nullptr) { nodo_actual->siguiente->anterior = nodo_nuevo; }
@@ -56,20 +61,17 @@ public:
 		nodo_cabeza->cantidad_asignaturas++;
 	}
 	void eliminar_asignatura(string _codigo) {
-		Nodo_Asignatura* nodo_eliminar = nodo_inicial; bool encontrar;
-		for (int i = 1; i < nodo_cabeza->cantidad_asignaturas; i++) {
-			encontrar = (nodo_eliminar->asignatura.codigo == _codigo);
-			if (encontrar) {
-				lista_estudiante.eliminar_todo(nodo_eliminar);
-				nodo_eliminar->anterior->siguiente = nodo_eliminar->siguiente;
-				nodo_eliminar->siguiente->anterior = nodo_eliminar->anterior;
-				delete nodo_eliminar;
-				cout << "Se ha eliminado correctamente la asignatura.\n";
-				cout << "--------------------------------------------------------------------\n";
-				nodo_cabeza->cantidad_asignaturas--; 
-				return;
-			}
-			nodo_eliminar = nodo_eliminar->siguiente;
+		Nodo_Asignatura* nodo_eliminar = nodo_inicial;
+		nodo_eliminar = buscar_nodo(nodo_eliminar, -1, nodo_eliminar->asignatura.codigo, _codigo);
+		if (nodo_encontrar(nodo_eliminar)) {
+			lista_estudiante.eliminar_todo(nodo_eliminar);
+			nodo_eliminar->anterior->siguiente = nodo_eliminar->siguiente;
+			nodo_eliminar->siguiente->anterior = nodo_eliminar->anterior;
+			delete nodo_eliminar;
+			cout << "Se ha eliminado correctamente la asignatura.\n";
+			cout << "--------------------------------------------------------------------\n";
+			nodo_cabeza->cantidad_asignaturas--; 
+			return;
 		}
 		cout << "No se ha encontrado la asignatura.\n";
 		cout << "--------------------------------------------------------------------\n";
@@ -93,12 +95,8 @@ public:
 	bool lista_vacia() {   return (nodo_cabeza->cantidad_asignaturas == 0); }
 	void ingresar_lista_estudiantes(string _codigo) {
 		Nodo_Asignatura* nodo_buscar = nodo_inicial;
-		bool encontrar = false;
-		while (nodo_buscar != nullptr) {
-			if (_codigo == nodo_buscar->asignatura.codigo) { encontrar = true; break; }
-			nodo_buscar = nodo_buscar->siguiente;
-		}
-		if (encontrar) {
+		nodo_buscar = buscar_nodo(nodo_buscar, -1, nodo_buscar->asignatura.codigo, _codigo);
+		if (nodo_encontrar(nodo_buscar)) {
 			enum opciones_e { INSERTAR = 1, ELIMINAR = 2, MOSTRAR_E = 3, MOSTRAR_E_M = 4, MOSTRAR_E_F = 5 };
 			int opcion_e, posicion_e;
 			string codigo_e;
@@ -176,12 +174,9 @@ public:
 		}
 	}
 	void get_cantidad_estudiantes(string _codigo) {
-		Nodo_Asignatura* nodo_buscar = nodo_inicial; bool encontrar = false;
-		while (nodo_buscar->siguiente != nullptr) {
-			if (_codigo == nodo_buscar->asignatura.codigo) { encontrar = true; break; }
-			nodo_buscar = nodo_buscar->siguiente;
-		}
-		if (encontrar) {
+		Nodo_Asignatura* nodo_buscar = nodo_inicial;
+		nodo_buscar = buscar_nodo(nodo_buscar, 0, nodo_buscar->asignatura.codigo, _codigo);
+		if (nodo_encontrar(nodo_buscar)) {
 			cout << "La cantidad de estudianes es: " << lista_estudiante.get_cantidad_estudiantes(nodo_buscar) << "\n";
 			cout << "--------------------------------------------------------------------\n";
 		} else {

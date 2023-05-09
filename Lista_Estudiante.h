@@ -9,6 +9,12 @@ class Lista_Estudiante
 {
 private:
 	Nodo_Estudiante* nodo_inicial = nullptr;
+	Nodo_Estudiante* buscar_nodo_e(Nodo_Estudiante* nodo_c, int _posicion = -1, string _codigo_n = "", string _codigo = " ") {
+		int indice_busqueda_e = 1;
+		while ((nodo_c != nullptr) && (indice_busqueda_e != _posicion - 1) && (_codigo_n != _codigo)) { nodo_c = nodo_c->siguiente; indice_busqueda_e++; }
+		return nodo_c;
+	}
+	bool nodo_encontrar_e(Nodo_Estudiante* nodo_c) { return (nodo_c != nullptr); }
 public:
 	Lista_Estudiante(Nodo_Asignatura* _nodo_c) { _nodo_c->siguiente_e = nodo_inicial; }
 	Lista_Estudiante() {}
@@ -38,6 +44,8 @@ public:
 			cin.ignore(numeric_limits<streamsize>::max(), '\n');
 			cout << "Nota del estudiante incorrecta: ";
 		}
+		nodo_nuevo->estudiante.estado = (nodo_nuevo->estudiante.nota < 51) ? "reprobado" : "aprobado";
+		cout << "Estado del estudiante: " << nodo_nuevo->estudiante.estado << "\n";
 		if (lista_vacia_e(_nodo_c)) {
 			nodo_nuevo->anterior = nullptr;
 			nodo_nuevo->siguiente = nullptr;
@@ -47,7 +55,7 @@ public:
 		else {
 			Nodo_Estudiante* nodo_actual = nodo_inicial;
 			if (_posicion != 1) {
-				for (int i = 1; i < _posicion - 1; i++) { nodo_actual = nodo_actual->siguiente; }
+				nodo_actual = buscar_nodo_e(nodo_actual, _posicion);
 				nodo_nuevo->siguiente = nodo_actual->siguiente;
 				if (nodo_actual->siguiente != nullptr) { nodo_actual->siguiente->anterior = nodo_nuevo; }
 				nodo_nuevo->anterior = nodo_actual;
@@ -64,18 +72,15 @@ public:
 	}
 	void eliminar_estudiante(Nodo_Asignatura* _nodo_c, string _codigo) {
 		_nodo_c->siguiente_e = nodo_inicial;
-		Nodo_Estudiante* nodo_eliminar = nodo_inicial; bool encontrar;
-		while (nodo_eliminar->siguiente != nullptr) {
-			nodo_eliminar = nodo_eliminar->siguiente;
-			encontrar = (nodo_eliminar->estudiante.codigo == _codigo);
-			if (encontrar) {
-				nodo_eliminar->anterior->siguiente = nodo_eliminar->siguiente;
-				nodo_eliminar->siguiente->anterior = nodo_eliminar->anterior;
-				delete nodo_eliminar;
-				cout << "Se ha eliminado correctamente la asignatura.\n";
-				cout << "--------------------------------------------------------------------\n";
-				_nodo_c->cantidad_estudiantes--; return;
-			}
+		Nodo_Estudiante* nodo_eliminar = nodo_inicial;
+		nodo_eliminar = buscar_nodo_e(nodo_eliminar, 0, nodo_eliminar->estudiante.codigo, _codigo);
+		if (nodo_encontrar_e(nodo_eliminar)) {
+			nodo_eliminar->anterior->siguiente = nodo_eliminar->siguiente;
+			nodo_eliminar->siguiente->anterior = nodo_eliminar->anterior;
+			delete nodo_eliminar;
+			cout << "Se ha eliminado correctamente la asignatura.\n";
+			cout << "--------------------------------------------------------------------\n";
+			_nodo_c->cantidad_estudiantes--;
 		}
 		cout << "No se ha encontrado la asignatura.\n";
 		cout << "--------------------------------------------------------------------\n";
@@ -95,6 +100,7 @@ public:
 			cout << "Edad del estudiante: " << nodo_actual->estudiante.edad << "\n";
 			cout << "Sexo del estudiante: " << nodo_actual->estudiante.sexo << "\n";
 			cout << "Nota del estudiante: " << nodo_actual->estudiante.nota << "\n";
+			cout << "Estado del estudiante: " << nodo_actual->estudiante.estado << "\n";
 			nodo_actual = nodo_actual->siguiente;
 			cout << "--------------------------------------------------------------------\n";
 			cout << "--------------------------------------------------------------------\n";
@@ -116,6 +122,7 @@ public:
 				cout << "Edad del estudiante: " << nodo_actual->estudiante.edad << "\n";
 				cout << "Sexo del estudiante: " << nodo_actual->estudiante.sexo << "\n";
 				cout << "Nota del estudiante: " << nodo_actual->estudiante.nota << "\n";
+				cout << "Estado del estudiante: " << nodo_actual->estudiante.estado << "\n";
 				cout << "--------------------------------------------------------------------\n";
 			}
 			nodo_actual = nodo_actual->siguiente;
@@ -137,6 +144,7 @@ public:
 				cout << "Edad del estudiante: " << nodo_actual->estudiante.edad << "\n";
 				cout << "Sexo del estudiante: " << nodo_actual->estudiante.sexo << "\n";
 				cout << "Nota del estudiante: " << nodo_actual->estudiante.nota << "\n";
+				cout << "Estado del estudiante: " << nodo_actual->estudiante.estado << "\n";
 				cout << "--------------------------------------------------------------------\n";
 			}
 			nodo_actual = nodo_actual->siguiente;
