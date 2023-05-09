@@ -27,7 +27,7 @@ int main(int argv, char** argc) {
 			cout << "--------------------------------------------------------------------\n";
 			cout << "Seleccione una opción válida: ";
 		}
-		if (lista_asignatura.lista_vacia() && (opcion > 1) && (opcion < 8)) { cout << "Error: Lista Vacía.\n"; opcion = 9; }
+		if (lista_asignatura.lista_vacia() && (opcion > 1) && (opcion < 8)) { cout << "Error: Lista Vacía.\n"; opcion = 1; }
 		cout << "--------------------------------------------------------------------\n";
 		cin.ignore();
 		opciones opcion_i = static_cast<opciones>(opcion);

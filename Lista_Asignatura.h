@@ -11,6 +11,7 @@ private:
 	Lista_Estudiante lista_estudiante;
 	Nodo_Cabeza_Asignatura* nodo_cabeza;
 	Nodo_Asignatura* nodo_inicial;
+	/*Nodo_Asignatura* buscar_nodo(Nodo_Asignatura* nodo_c, int _posicion = 0, string _codigo = "") {}*/
 public:
 	Lista_Asignatura() : nodo_cabeza(new Nodo_Cabeza_Asignatura), nodo_inicial(new Nodo_Asignatura) {}
 	void insertar_asignatura(int _posicion) {
