@@ -9,9 +9,9 @@ class Lista_Estudiante
 {
 private:
 	Nodo_Estudiante* nodo_inicial = nullptr;
-	Nodo_Estudiante* buscar_nodo_e(Nodo_Estudiante* nodo_c, int _posicion = -1, string _codigo_n = "", string _codigo = " ") {
+	Nodo_Estudiante* buscar_nodo_e(Nodo_Estudiante* nodo_c, int _posicion = -1, string _codigo = " ") {
 		int indice_busqueda_e = 1;
-		while ((nodo_c != nullptr) && (indice_busqueda_e != _posicion - 1) && (_codigo_n != _codigo)) { nodo_c = nodo_c->siguiente; indice_busqueda_e++; }
+		while ((nodo_c != nullptr) && (indice_busqueda_e != _posicion - 1) && (nodo_c->estudiante.codigo != _codigo)) { nodo_c = nodo_c->siguiente; indice_busqueda_e++; }
 		return nodo_c;
 	}
 	bool nodo_encontrar_e(Nodo_Estudiante* nodo_c) { return (nodo_c != nullptr); }
@@ -73,7 +73,7 @@ public:
 	void eliminar_estudiante(Nodo_Asignatura* _nodo_c, string _codigo) {
 		_nodo_c->siguiente_e = nodo_inicial;
 		Nodo_Estudiante* nodo_eliminar = nodo_inicial;
-		nodo_eliminar = buscar_nodo_e(nodo_eliminar, 0, nodo_eliminar->estudiante.codigo, _codigo);
+		nodo_eliminar = buscar_nodo_e(nodo_eliminar, 0, _codigo);
 		if (nodo_encontrar_e(nodo_eliminar)) {
 			nodo_eliminar->anterior->siguiente = nodo_eliminar->siguiente;
 			nodo_eliminar->siguiente->anterior = nodo_eliminar->anterior;

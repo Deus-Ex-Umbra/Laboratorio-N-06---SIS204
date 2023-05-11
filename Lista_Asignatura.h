@@ -11,9 +11,9 @@ private:
 	Lista_Estudiante lista_estudiante;
 	Nodo_Cabeza_Asignatura* nodo_cabeza;
 	Nodo_Asignatura* nodo_inicial;
-	Nodo_Asignatura* buscar_nodo(Nodo_Asignatura* nodo_c, int _posicion = -1, string _codigo_n = "", string _codigo = " ") {
+	Nodo_Asignatura* buscar_nodo(Nodo_Asignatura* nodo_c, int _posicion = 0, string _codigo = " ") {
 		int indice_busqueda = 1;
-		while ((nodo_c != nullptr) && (indice_busqueda != _posicion - 1) && (_codigo_n != _codigo)) { nodo_c = nodo_c->siguiente; indice_busqueda++; }
+		while ((nodo_c != nullptr) && (nodo_c->asignatura.codigo != _codigo) && (indice_busqueda != _posicion - 1)) { nodo_c = nodo_c->siguiente; indice_busqueda++; }
 		return nodo_c;
 	}
 	bool nodo_encontrar(Nodo_Asignatura* nodo_c) { return (nodo_c != nullptr); }
@@ -62,7 +62,7 @@ public:
 	}
 	void eliminar_asignatura(string _codigo) {
 		Nodo_Asignatura* nodo_eliminar = nodo_inicial;
-		nodo_eliminar = buscar_nodo(nodo_eliminar, -1, nodo_eliminar->asignatura.codigo, _codigo);
+		nodo_eliminar = buscar_nodo(nodo_eliminar, 0, _codigo);
 		if (nodo_encontrar(nodo_eliminar)) {
 			lista_estudiante.eliminar_todo(nodo_eliminar);
 			nodo_eliminar->anterior->siguiente = nodo_eliminar->siguiente;
@@ -95,7 +95,7 @@ public:
 	bool lista_vacia() {   return (nodo_cabeza->cantidad_asignaturas == 0); }
 	void ingresar_lista_estudiantes(string _codigo) {
 		Nodo_Asignatura* nodo_buscar = nodo_inicial;
-		nodo_buscar = buscar_nodo(nodo_buscar, -1, nodo_buscar->asignatura.codigo, _codigo);
+		nodo_buscar = buscar_nodo(nodo_buscar, 0, _codigo);
 		if (nodo_encontrar(nodo_buscar)) {
 			enum opciones_e { INSERTAR = 1, ELIMINAR = 2, MOSTRAR_E = 3, MOSTRAR_E_M = 4, MOSTRAR_E_F = 5 };
 			int opcion_e, posicion_e;
@@ -117,13 +117,13 @@ public:
 				cout << "6. Salir.\n";
 				cout << "--------------------------------------------------------------------\n";
 				cout << "Seleccione una opción: ";
-				while (!(cin >> opcion_e) || (opcion_e < 1 || opcion_e > 8)) {
+				while (!(cin >> opcion_e) || (opcion_e < 1 || opcion_e > 6)) {
 					cin.clear();
 					cin.ignore(numeric_limits<streamsize>::max(), '\n');
 					cout << "--------------------------------------------------------------------\n";
 					cout << "Seleccione una opción válida: ";
 				}
-				if (lista_estudiante.lista_vacia_e(nodo_buscar) && (opcion_e > 1) && (opcion_e < 8)) { cout << "Error: Lista Vacía.\n"; opcion_e = 1; }
+				if (lista_estudiante.lista_vacia_e(nodo_buscar) && (opcion_e > 1) && (opcion_e < 6)) { cout << "Error: Lista Vacía.\n"; opcion_e = 1; }
 				cin.ignore();
 				opciones_e opcion_i = static_cast<opciones_e>(opcion_e);
 				switch (opcion_i) {
@@ -175,7 +175,7 @@ public:
 	}
 	void get_cantidad_estudiantes(string _codigo) {
 		Nodo_Asignatura* nodo_buscar = nodo_inicial;
-		nodo_buscar = buscar_nodo(nodo_buscar, 0, nodo_buscar->asignatura.codigo, _codigo);
+		nodo_buscar = buscar_nodo(nodo_buscar, 0, _codigo);
 		if (nodo_encontrar(nodo_buscar)) {
 			cout << "La cantidad de estudianes es: " << lista_estudiante.get_cantidad_estudiantes(nodo_buscar) << "\n";
 			cout << "--------------------------------------------------------------------\n";
