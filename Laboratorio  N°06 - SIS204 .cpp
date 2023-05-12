@@ -5,7 +5,7 @@ using namespace std;
 int main(int argv, char** argc) {
 	Lista_Asignatura lista_asignatura;
 	string codigo_a;
-	enum opciones { INSERTAR = 1, ELIMINAR = 2, MOSTRAR_A = 3, MOSTRAR_C_A = 4, INGRESAR_A = 5, MOSTRAR_C_E = 6, MOSTRAR_A_E = 7};
+	enum opciones { INSERTAR = 1, ELIMINAR = 2, MOSTRAR_A = 3, MOSTRAR_C_A = 4, INGRESAR_A = 5, MOSTRAR_C_E = 6, MOSTRAR_A_E = 7 };
 	int opcion, posicion;
 	do {
 		system("cls");
@@ -37,9 +37,9 @@ int main(int argv, char** argc) {
 			cout << "***Se insertará una asignatura***\n";
 			cout << "--------------------------------------------------------------------\n";
 			cout << "Escriba la posición donde se insertará la asignatura: ";
-			while (!(cin >> posicion)) { 
-				cout << "--------------------------------------------------------------------\n"; 
-				cin.clear(); cin.ignore(numeric_limits<streamsize>::max(), '\n'); cout << "Escriba la posición donde se insertará la asignatura: "; 
+			while (!(cin >> posicion)) {
+				cout << "--------------------------------------------------------------------\n";
+				cin.clear(); cin.ignore(numeric_limits<streamsize>::max(), '\n'); cout << "Escriba la posición donde se insertará la asignatura: ";
 			} cin.ignore();
 			cout << "--------------------------------------------------------------------\n";
 			lista_asignatura.insertar_asignatura(posicion);
@@ -67,8 +67,8 @@ int main(int argv, char** argc) {
 			cout << "Escriba el código de la asignatura a la que se ingresará: "; getline(cin, codigo_a);
 			cout << "--------------------------------------------------------------------\n";
 			lista_asignatura.ingresar_lista_estudiantes(codigo_a);
-			break;
-		case MOSTRAR_C_E:
+		break;
+			case MOSTRAR_C_E:
 			cout << "***Se mostrará la cantidad de estudiantes de una asignatura***\n";
 			cout << "--------------------------------------------------------------------\n";
 			cout << "Escriba el código de la asignatura que desea revisar: "; getline(cin, codigo_a);
@@ -81,7 +81,7 @@ int main(int argv, char** argc) {
 			lista_asignatura.mostrar_todo();
 			break;
 		default:
-			cout << "Gracias por usar el programa.\n"; 
+			cout << "Gracias por usar el programa.\n";
 			cout << "--------------------------------------------------------------------\n"; system("pause"); return false;
 			break;
 		}
