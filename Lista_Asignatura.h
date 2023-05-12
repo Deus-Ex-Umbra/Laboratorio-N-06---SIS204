@@ -21,6 +21,7 @@ public:
 	Lista_Asignatura() : nodo_cabeza(new Nodo_Cabeza_Asignatura), nodo_inicial(new Nodo_Asignatura) {}
 	void insertar_asignatura(int _posicion) {
 		Nodo_Asignatura* nodo_nuevo = new Nodo_Asignatura();
+		Nodo_Asignatura* nodo_actual = nodo_inicial;
 		while (_posicion > nodo_cabeza->cantidad_asignaturas + 1 || _posicion < 0) { 
 			cout << "Inserte una posición válida: "; cin >> _posicion; cin.ignore(); 
 			cout << "--------------------------------------------------------------------\n";
@@ -34,28 +35,20 @@ public:
 			cin.ignore(numeric_limits<streamsize>::max(), '\n');
 			cout << "Cantidad de horas incorrecta: ";
 		}
-		if (lista_vacia()) {
+		if (lista_vacia() || _posicion == 1) {
 			nodo_nuevo->siguiente_e = nullptr;
-			nodo_cabeza->siguiente_a = nodo_nuevo;
+			nodo_nuevo->siguiente = (!lista_vacia()) ? nodo_actual : nullptr;
+			if (nodo_nuevo->siguiente != nullptr) { nodo_actual->anterior = nodo_nuevo; }
 			nodo_nuevo->anterior = nullptr;
-			nodo_nuevo->siguiente = nullptr;
 			nodo_inicial = nodo_nuevo;
+			nodo_cabeza->siguiente_a = nodo_nuevo;
 		} else {
-			Nodo_Asignatura* nodo_actual = nodo_inicial;
-			if (_posicion != 1) {
-				nodo_actual = buscar_nodo(nodo_actual, _posicion);
-				nodo_nuevo->siguiente_e = nullptr;
-				nodo_nuevo->siguiente = nodo_actual->siguiente;
-				if (nodo_actual->siguiente != nullptr) { nodo_actual->siguiente->anterior = nodo_nuevo; }
-				nodo_nuevo->anterior = nodo_actual;
-				nodo_actual->siguiente = nodo_nuevo;
-			} else {
-				nodo_nuevo->siguiente_e = nullptr;
-				nodo_nuevo->siguiente = nodo_actual;
-				if (nodo_nuevo->siguiente != nullptr) { nodo_actual->anterior = nodo_nuevo; }
-				nodo_nuevo->anterior = nullptr;
-				nodo_inicial = nodo_nuevo;
-			}
+			nodo_actual = buscar_nodo(nodo_actual, _posicion);
+			nodo_nuevo->siguiente_e = nullptr;
+			nodo_nuevo->siguiente = nodo_actual->siguiente;
+			if (nodo_actual->siguiente != nullptr) { nodo_actual->siguiente->anterior = nodo_nuevo; }
+			nodo_nuevo->anterior = nodo_actual;
+			nodo_actual->siguiente = nodo_nuevo;
 		}
 		cout << "--------------------------------------------------------------------\n";
 		nodo_cabeza->cantidad_asignaturas++;
@@ -65,9 +58,10 @@ public:
 		nodo_eliminar = buscar_nodo(nodo_eliminar, 0, _codigo);
 		if (nodo_encontrar(nodo_eliminar)) {
 			lista_estudiante.eliminar_todo(nodo_eliminar);
-			nodo_eliminar->anterior->siguiente = nodo_eliminar->siguiente;
-			nodo_eliminar->siguiente->anterior = nodo_eliminar->anterior;
+			if (nodo_eliminar->anterior != nullptr) { nodo_eliminar->anterior->siguiente = nodo_eliminar->siguiente; }
+			if (nodo_eliminar->siguiente != nullptr) { nodo_eliminar->siguiente->anterior = nodo_eliminar->anterior; }
 			delete nodo_eliminar;
+			if (lista_vacia()) { nodo_cabeza->siguiente_a = nullptr; nodo_inicial = nullptr; }
 			cout << "Se ha eliminado correctamente la asignatura.\n";
 			cout << "--------------------------------------------------------------------\n";
 			nodo_cabeza->cantidad_asignaturas--; 
