@@ -1,5 +1,4 @@
 #pragma once
-#include "Nodo_Estudiante.h"
 #include <string>
 class Nodo_Asignatura
 {
@@ -10,7 +9,7 @@ public:
 	}asignatura;
 	int cantidad_estudiantes;
 	Nodo_Asignatura* siguiente, * anterior;
-	Nodo_Estudiante* siguiente_e;
+	class Nodo_Estudiante* siguiente_e;
 	Nodo_Asignatura() : siguiente(nullptr), anterior(nullptr), siguiente_e(nullptr), cantidad_estudiantes(0) {}
 };
 

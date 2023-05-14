@@ -71,6 +71,7 @@ public:
 		if (nodo_encontrar_e(nodo_eliminar)) {
 			if (nodo_eliminar->anterior != nullptr) { nodo_eliminar->anterior->siguiente = nodo_eliminar->siguiente; }
 			if (nodo_eliminar->siguiente != nullptr) { nodo_eliminar->siguiente->anterior = nodo_eliminar->anterior; }
+			if (nodo_eliminar == nodo_inicial) { nodo_inicial = nodo_eliminar->siguiente; }
 			if (lista_vacia_e(_nodo_c)) { _nodo_c->siguiente_e = nullptr; nodo_inicial = nullptr; }
 			delete nodo_eliminar;
 			cout << "Se ha eliminado correctamente la asignatura.\n";
@@ -127,7 +128,7 @@ public:
 		nodo_inicial = _nodo_c->siguiente_e;
 		Nodo_Estudiante* nodo_actual = nodo_inicial; int i = 1;
 		cout << "--------------------------------------------------------------------\n";
-		cout << "Cantidad de estudiantes en esta asignatura: " << _nodo_c->cantidad_estudiantes << "\n.";
+		cout << "Cantidad de estudiantes en esta asignatura: " << _nodo_c->cantidad_estudiantes << "\n";
 		cout << "--------------------------------------------------------------------\n";
 		do {
 			if (nodo_actual->estudiante.sexo == "femenino") {

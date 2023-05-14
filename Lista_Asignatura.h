@@ -60,6 +60,7 @@ public:
 			lista_estudiante.eliminar_todo(nodo_eliminar);
 			if (nodo_eliminar->anterior != nullptr) { nodo_eliminar->anterior->siguiente = nodo_eliminar->siguiente; }
 			if (nodo_eliminar->siguiente != nullptr) { nodo_eliminar->siguiente->anterior = nodo_eliminar->anterior; }
+			if (nodo_eliminar == nodo_inicial) { nodo_inicial = nodo_eliminar->siguiente; }
 			if (lista_vacia()) { nodo_cabeza->siguiente_a = nullptr; nodo_inicial = nullptr; }
 			delete nodo_eliminar;
 			cout << "Se ha eliminado correctamente la asignatura.\n";
