@@ -89,3 +89,14 @@ int main(int argv, char** argc) {
 	} while (true);
 	return 0;
 }
+/*Este proyecto pertenece originalmente a Aparicio Llanquipacha Gabriel, el cual
+* ha sido subido a GitHub con fines educativos y de prevención de posibles 
+* pérdidas del mismo, por lo cual puede constarse de su autoría en el siguiente
+* enlace: https://github.com/Deus-Ex-Umbra, en el cual puede consultarse toda la
+* información necesaria para contactar con el autor (Aparicio Llanquipacha Gabriel)
+* y verificar la autoría del proyecto. En caso de encontrarse un código muy similar
+* o incluso plagiado, se ruega contactar con el autor del repositorio para tomar
+* las medidas necesarias. 
+* Atentamente: Aparicio Llanquipacha Gabriel.
+* Carrera: Ingeniería en Ciencias de la Computación.
+*/
