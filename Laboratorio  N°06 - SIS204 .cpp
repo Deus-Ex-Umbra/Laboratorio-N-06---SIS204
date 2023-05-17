@@ -1,5 +1,6 @@
 ﻿//Laboratorio N°06 - SIS204
 #include <iostream>
+#include <string>
 #include "Lista_Asignatura.h"
 using namespace std;
 int main(int argv, char** argc) {
