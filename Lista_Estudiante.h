@@ -19,7 +19,7 @@ public:
 	Lista_Estudiante(Nodo_Asignatura* _nodo_c) { _nodo_c->siguiente_e = nodo_inicial; }
 	Lista_Estudiante() {}
 	void insertar_estudiante(Nodo_Asignatura* _nodo_c, int _posicion) {
-		_nodo_c->siguiente_e = nodo_inicial;
+		nodo_inicial = _nodo_c->siguiente_e;
 		Nodo_Estudiante* nodo_nuevo = new Nodo_Estudiante();
 		Nodo_Estudiante* nodo_actual = nodo_inicial;
 		while (_posicion > _nodo_c->cantidad_estudiantes + 1 || _posicion < 0) {
@@ -40,7 +40,7 @@ public:
 			cout << "Sexo del estudiante incorrecto (masculino/femenino): "; getline(cin, nodo_nuevo->estudiante.sexo);
 		}
 		cout << "Nota del estudiante: "; 
-		while (!(cin >> nodo_nuevo->estudiante.nota) || nodo_nuevo->estudiante.nota > 100 || nodo_nuevo->estudiante.nota < 1) {
+		while (!(cin >> nodo_nuevo->estudiante.nota) || nodo_nuevo->estudiante.nota > 100 || nodo_nuevo->estudiante.nota < 0) {
 			cin.clear();
 			cin.ignore(numeric_limits<streamsize>::max(), '\n');
 			cout << "Nota del estudiante incorrecta: ";
