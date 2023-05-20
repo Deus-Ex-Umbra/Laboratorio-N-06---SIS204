@@ -1,4 +1,4 @@
-﻿//Laboratorio N°06 - SIS204
+﻿  //Laboratorio N°06 - SIS204
 #include <iostream>
 #include <string>
 #include "Lista_Asignatura.h"
