@@ -60,7 +60,7 @@ public:
 			lista_estudiante.eliminar_todo(nodo_eliminar);
 			if (nodo_eliminar->anterior != nullptr) { nodo_eliminar->anterior->siguiente = nodo_eliminar->siguiente; }
 			if (nodo_eliminar->siguiente != nullptr) { nodo_eliminar->siguiente->anterior = nodo_eliminar->anterior; }
-			if (nodo_eliminar == nodo_inicial) { nodo_inicial = nodo_eliminar->siguiente; }
+			if (nodo_eliminar == nodo_inicial) { nodo_inicial = nodo_eliminar->siguiente; nodo_cabeza->siguiente_a = nodo_inicial; }
 			delete nodo_eliminar;
 			if (lista_vacia()) { nodo_cabeza->siguiente_a = nullptr; nodo_inicial = nullptr; }
 			cout << "Se ha eliminado correctamente la asignatura.\n";
@@ -73,7 +73,7 @@ public:
 	}
 	void mostrar_asignaturas() {
 		Nodo_Asignatura* nodo_actual = nodo_inicial;
-		int i = 0;
+		int i = 1;
 		cout << "Cantidad total de asignaturas: " << nodo_cabeza->cantidad_asignaturas << "\n";
 		cout << "--------------------------------------------------------------------\n";
 		do {
@@ -138,7 +138,7 @@ public:
 				case ELIMINAR:
 					cout << "***Se eliminará un estudiante***\n";
 					cout << "--------------------------------------------------------------------\n";
-					cout << "Escriba el código del estudiante que se eliminará: "; getline(cin, codigo_e); cin.ignore();
+					cout << "Escriba el código del estudiante que se eliminará: "; getline(cin, codigo_e);
 					cout << "--------------------------------------------------------------------\n";
 					lista_estudiante.eliminar_estudiante(nodo_buscar, codigo_e); system("pause");
 					break;
