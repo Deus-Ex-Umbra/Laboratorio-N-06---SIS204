@@ -73,16 +73,16 @@ public:
 	}
 	void mostrar_asignaturas() {
 		Nodo_Asignatura* nodo_actual = nodo_inicial;
-		int i = 1;
+		int i = 0;
 		cout << "Cantidad total de asignaturas: " << nodo_cabeza->cantidad_asignaturas << "\n";
 		cout << "--------------------------------------------------------------------\n";
 		do {
-			cout << "Asignatura N°" << i << ":\n";
+			cout << "Asignatura N°" << i++ << ":\n";
 			cout << "Código: " << nodo_actual->asignatura.codigo << "\n";
 			cout << "Nombre: " << nodo_actual->asignatura.nombre << "\n";
 			cout << "Descripción: " << nodo_actual->asignatura.descripcion << "\n";
 			cout << "Cantidad de horas: " << nodo_actual->asignatura.cantidad_de_horas << "\n";
-			nodo_actual = nodo_actual->siguiente; i++;
+			nodo_actual = nodo_actual->siguiente;
 			cout << "--------------------------------------------------------------------\n";
 		} while (nodo_actual != nullptr);
 	}
@@ -180,16 +180,16 @@ public:
 		}
 	}
 	void mostrar_todo() {
-		Nodo_Asignatura* nodo_actual = nodo_inicial; int i = 1;
+		Nodo_Asignatura* nodo_actual = nodo_inicial; int i = 0;
 		do {
-			cout << "Asignatura N°" << i << ":\n";
+			cout << "Asignatura N°" << i++ << ":\n";
 			cout << "Código: " << nodo_actual->asignatura.codigo << "\n";
 			cout << "Nombre: " << nodo_actual->asignatura.nombre << "\n";
 			cout << "Descripción: " << nodo_actual->asignatura.descripcion << "\n";
 			cout << "Cantidad de horas: " << nodo_actual->asignatura.cantidad_de_horas << "\n";
 			cout << "--------------------------------------------------------------------\n";
 			if (!lista_estudiante.lista_vacia_e(nodo_actual)) { lista_estudiante.mostrar_estudiantes(nodo_actual); }
-			nodo_actual = nodo_actual->siguiente; i++;
+			nodo_actual = nodo_actual->siguiente;
 		} while (nodo_actual != nullptr);
 	}
 };

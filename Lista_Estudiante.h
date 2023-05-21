@@ -83,12 +83,12 @@ public:
 	}
 	void mostrar_estudiantes(Nodo_Asignatura* _nodo_c) {
 		nodo_inicial = _nodo_c->siguiente_e;
-		Nodo_Estudiante* nodo_actual = nodo_inicial; int i = 1;
+		Nodo_Estudiante* nodo_actual = nodo_inicial; int i = 0;
 		cout << "--------------------------------------------------------------------\n";
 		cout << "Cantidad de estudiantes en esta asignatura: " << _nodo_c->cantidad_estudiantes << "\n";
 		cout << "--------------------------------------------------------------------\n";
 		do {
-			cout << "Estudiante N°" << i << ":\n"; i++;
+			cout << "Estudiante N°" << i++ << ":\n";
 			cout << "--------------------------------------------------------------------\n";
 			cout << "Código del estudiante: " << nodo_actual->estudiante.codigo << "\n";
 			cout << "Nombre del estudiante: " << nodo_actual->estudiante.nombre << "\n";
@@ -104,13 +104,13 @@ public:
 	}
 	void mostar_estudiantes_masculinos(Nodo_Asignatura* _nodo_c) {
 		nodo_inicial = _nodo_c->siguiente_e;
-		Nodo_Estudiante* nodo_actual = nodo_inicial; int i = 1;
+		Nodo_Estudiante* nodo_actual = nodo_inicial; int i = 0;
 		cout << "--------------------------------------------------------------------\n";
 		cout << "Cantidad de estudiantes en esta asignatura: " << _nodo_c->cantidad_estudiantes << "\n";
 		cout << "--------------------------------------------------------------------\n";
 		do {
 			if (nodo_actual->estudiante.sexo == "masculino") {
-				cout << "Estudiante N°" << i << ":\n"; i++;
+				cout << "Estudiante N°" << i++ << ":\n";
 				cout << "--------------------------------------------------------------------\n";
 				cout << "Código del estudiante: " << nodo_actual->estudiante.codigo << "\n";
 				cout << "Nombre del estudiante: " << nodo_actual->estudiante.nombre << "\n";
@@ -126,13 +126,13 @@ public:
 	}
 	void mostar_estudiantes_femeninos(Nodo_Asignatura* _nodo_c) {
 		nodo_inicial = _nodo_c->siguiente_e;
-		Nodo_Estudiante* nodo_actual = nodo_inicial; int i = 1;
+		Nodo_Estudiante* nodo_actual = nodo_inicial; int i = 0;
 		cout << "--------------------------------------------------------------------\n";
 		cout << "Cantidad de estudiantes en esta asignatura: " << _nodo_c->cantidad_estudiantes << "\n";
 		cout << "--------------------------------------------------------------------\n";
 		do {
 			if (nodo_actual->estudiante.sexo == "femenino") {
-				cout << "Estudiante N°" << i << ":\n"; i++;
+				cout << "Estudiante N°" << i++ << ":\n";
 				cout << "--------------------------------------------------------------------\n";
 				cout << "Código del estudiante: " << nodo_actual->estudiante.codigo << "\n";
 				cout << "Nombre del estudiante: " << nodo_actual->estudiante.nombre << "\n";
