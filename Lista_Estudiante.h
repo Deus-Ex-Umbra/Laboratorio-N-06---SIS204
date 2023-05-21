@@ -65,7 +65,7 @@ public:
 		_nodo_c->cantidad_estudiantes++;
 	}
 	void eliminar_estudiante(Nodo_Asignatura* _nodo_c, string _codigo) {
-		_nodo_c->siguiente_e = nodo_inicial;
+		nodo_inicial = _nodo_c->siguiente_e;
 		Nodo_Estudiante* nodo_eliminar = nodo_inicial;
 		nodo_eliminar = buscar_nodo_e(nodo_eliminar, 0, _codigo);
 		if (nodo_encontrar_e(nodo_eliminar)) {
