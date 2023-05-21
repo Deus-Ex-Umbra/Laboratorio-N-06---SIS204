@@ -100,4 +100,13 @@ int main(int argv, char** argc) {
 * las medidas necesarias. 
 * Atentamente: Aparicio Llanquipacha Gabriel.
 * Carrera: Ingeniería en Ciencias de la Computación.
+*  ⣠⣤⣤⣤⣤⣴⣿⣤⡄            
+* ⣿⣿⣿⣿⣿⣿⣿⣿⠁            
+*  ⠙⠿⢿⣿⣿⣿⣿⣿⣷⣶⣶⣶⣿⣿⣷⣶⣶⣤⣀  
+*    ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣧ 
+*    ⠹⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡆
+*      ⠙⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠁
+*       ⢻⣿⣿⣿⡿⠉⠉⠉⠙⠿⣿⣿⣿⣿⣿⣧
+*       ⣸⡿⣸⣿⠁      ⠉⣿⡇⠉⣿⡿
+*      ⠚⠋⠥⠿⠇       ⠒⠛⠛⠡⠴⠿
 */
