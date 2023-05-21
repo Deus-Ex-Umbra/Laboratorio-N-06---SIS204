@@ -83,7 +83,7 @@ public:
 	}
 	void mostrar_estudiantes(Nodo_Asignatura* _nodo_c) {
 		nodo_inicial = _nodo_c->siguiente_e;
-		Nodo_Estudiante* nodo_actual = nodo_inicial; int i = 0;
+		Nodo_Estudiante* nodo_actual = nodo_inicial; int i = 1;
 		cout << "--------------------------------------------------------------------\n";
 		cout << "Cantidad de estudiantes en esta asignatura: " << _nodo_c->cantidad_estudiantes << "\n";
 		cout << "--------------------------------------------------------------------\n";
@@ -104,7 +104,7 @@ public:
 	}
 	void mostar_estudiantes_masculinos(Nodo_Asignatura* _nodo_c) {
 		nodo_inicial = _nodo_c->siguiente_e;
-		Nodo_Estudiante* nodo_actual = nodo_inicial; int i = 0;
+		Nodo_Estudiante* nodo_actual = nodo_inicial; int i = 1;
 		cout << "--------------------------------------------------------------------\n";
 		cout << "Cantidad de estudiantes en esta asignatura: " << _nodo_c->cantidad_estudiantes << "\n";
 		cout << "--------------------------------------------------------------------\n";
@@ -126,7 +126,7 @@ public:
 	}
 	void mostar_estudiantes_femeninos(Nodo_Asignatura* _nodo_c) {
 		nodo_inicial = _nodo_c->siguiente_e;
-		Nodo_Estudiante* nodo_actual = nodo_inicial; int i = 0;
+		Nodo_Estudiante* nodo_actual = nodo_inicial; int i = 1;
 		cout << "--------------------------------------------------------------------\n";
 		cout << "Cantidad de estudiantes en esta asignatura: " << _nodo_c->cantidad_estudiantes << "\n";
 		cout << "--------------------------------------------------------------------\n";

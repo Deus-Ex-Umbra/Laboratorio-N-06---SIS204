@@ -180,7 +180,7 @@ public:
 		}
 	}
 	void mostrar_todo() {
-		Nodo_Asignatura* nodo_actual = nodo_inicial; int i = 0;
+		Nodo_Asignatura* nodo_actual = nodo_inicial; int i = 1;
 		do {
 			cout << "Asignatura N°" << i++ << ":\n";
 			cout << "Código: " << nodo_actual->asignatura.codigo << "\n";
