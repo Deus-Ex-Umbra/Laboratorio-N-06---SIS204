@@ -113,7 +113,7 @@ public:
 		cout << "Cantidad de estudiantes en esta asignatura: " << _nodo_c->cantidad_estudiantes << "\n";
 		cout << "--------------------------------------------------------------------\n";
 		do {
-			if (nodo_actual->estudiante.sexo == "masculino") {
+			if (nodo_actual->estudiante.sexo == "Masculino") {
 				cout << "Estudiante N°" << i++ << ":\n";
 				cout << "--------------------------------------------------------------------\n";
 				cout << "Código del estudiante: " << nodo_actual->estudiante.codigo << "\n";
@@ -135,7 +135,7 @@ public:
 		cout << "Cantidad de estudiantes en esta asignatura: " << _nodo_c->cantidad_estudiantes << "\n";
 		cout << "--------------------------------------------------------------------\n";
 		do {
-			if (nodo_actual->estudiante.sexo == "femenino") {
+			if (nodo_actual->estudiante.sexo == "Femenino") {
 				cout << "Estudiante N°" << i++ << ":\n";
 				cout << "--------------------------------------------------------------------\n";
 				cout << "Código del estudiante: " << nodo_actual->estudiante.codigo << "\n";
