@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include <algorithm>
 #include <string>
 #include "Lista_Asignatura.h"
 #include "Nodo_Asignatura.h"
@@ -35,10 +36,12 @@ public:
 			cin.ignore(numeric_limits<streamsize>::max(), '\n');
 			cout << "Edad del estudiante incorrecta: ";
 		} cin.ignore();
-		cout << "Sexo del estudiante (masculino/femenino): "; getline(cin, nodo_nuevo->estudiante.sexo);
-		while (nodo_nuevo->estudiante.sexo != "masculino" && nodo_nuevo->estudiante.sexo != "femenino") {
-			cout << "Sexo del estudiante incorrecto (masculino/femenino): "; getline(cin, nodo_nuevo->estudiante.sexo);
-		}
+		cout << "Sexo del estudiante: "; getline(cin, nodo_nuevo->estudiante.sexo);
+		do {
+			std::cout << "Ingrese el Sexo del Estudiante: "; std::getline(std::cin, nodo_nuevo->estudiante.sexo);
+			std::transform(nodo_nuevo->estudiante.sexo.begin(), nodo_nuevo->estudiante.sexo.end(), nodo_nuevo->estudiante.sexo.begin(), ::tolower);
+		} while (nodo_nuevo->estudiante.sexo != "masculino" && nodo_nuevo->estudiante.sexo != "femenino");
+		nodo_nuevo->estudiante.sexo = (nodo_nuevo->estudiante.sexo == "masculino") ? "Masculino" : "Femenino";
 		cout << "Nota del estudiante: "; 
 		while (!(cin >> nodo_nuevo->estudiante.nota) || nodo_nuevo->estudiante.nota > 100 || nodo_nuevo->estudiante.nota < 0) {
 			cin.clear();
